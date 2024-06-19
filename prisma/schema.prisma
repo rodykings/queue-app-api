@@ -1,0 +1,45 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Record {
+  id          String   @id @default(uuid())
+  name        String?
+  adults      Int
+  children    Int
+  priority    Boolean
+  assistance  Boolean
+  nationality String?
+  createdAt   DateTime @default(now())
+  tickets     Ticket[]
+}
+
+model Ticket {
+  id        String    @id @default(uuid())
+  number    Int
+  createdAt DateTime  @default(now())
+  recordId  String
+  record    Record    @relation(fields: [recordId], references: [id])
+  entryAt   DateTime?
+}
+
+model TicketControl {
+  id                          String    @id @default(uuid())
+  year                        Int
+  month                       Int
+  day                         Int
+  lastRegisterTicket          Int?
+  lastRegisterTicketTimestamp DateTime?
+  lastEntryTicket             Int?
+  lastEntryTicketTimestamp    DateTime?
+
+  @@unique([year, month, day])
+}
