@@ -21,8 +21,7 @@ recordRouter.get("/", async (request: Request, response: Response) => {
 recordRouter.post("/", async (request: Request, response: Response) => {
   const recordSchema = z
     .object({
-      name: z.string().min(1).optional(),
-      nationality: z.string().min(1).optional(),
+      nationality: z.string().optional(),
       adults: z
         .number()
         .min(0, "Deve ser maior que 0")

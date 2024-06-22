@@ -17,7 +17,16 @@ const PORT: number = parseInt(process.env.PORT as string, 10);
 
 const app = express();
 const server = http.createServer(app);
-export const io = new Server(server);
+export const io = new Server(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+});
+
+server.on("connection", () => {
+  console.log("user connected");
+});
 
 app.use(cors());
 app.use(express.json());

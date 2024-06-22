@@ -12,7 +12,6 @@ datasource db {
 
 model Record {
   id          String   @id @default(uuid())
-  name        String?
   adults      Int
   children    Int
   priority    Boolean
@@ -40,6 +39,7 @@ model TicketControl {
   lastRegisterTicketTimestamp DateTime?
   lastEntryTicket             Int?
   lastEntryTicketTimestamp    DateTime?
+  lastWaitingTimeMinutes      Int?
 
   @@unique([year, month, day])
 }

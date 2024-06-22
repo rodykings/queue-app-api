@@ -3,5 +3,5 @@ Content-Type: application/json
 
 {
     "adults":3,
-    "children":3
+    "children":1
 }

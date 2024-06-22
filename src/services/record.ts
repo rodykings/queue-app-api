@@ -13,7 +13,6 @@ export async function findAllRecords() {
 export async function createRecord({
   children,
   adults,
-  name,
   nationality,
   assistance = false,
   priority = false,
@@ -21,7 +20,6 @@ export async function createRecord({
   const [newRecord, newTicketControl] = await db.$transaction(async (db) => {
     const newRecord = await db.record.create({
       data: {
-        name,
         nationality,
         adults,
         children,
@@ -84,8 +82,6 @@ export async function createRecord({
 
     return [newRecord, newTicketControl];
   });
-
-  console.log([newRecord, newTicketControl]);
 
   io.emit("ticket-control", newTicketControl);
 
