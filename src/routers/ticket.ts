@@ -2,7 +2,6 @@ import express from "express";
 import type { Request, Response } from "express";
 import * as TicketService from "../services/ticket";
 import { z } from "zod";
-import { HttpError } from "../utils/http-errors";
 
 export const ticketRouter = express.Router();
 
@@ -15,8 +14,6 @@ ticketRouter.post(
   "/:ticketNumber/entrance",
   async (request: Request, response: Response) => {
     const ticketNumberSchema = z.number().min(0);
-
-    console.log(request.params.ticketNumber);
 
     const parseResult = await ticketNumberSchema.safeParseAsync(
       Number(request.params.ticketNumber)
